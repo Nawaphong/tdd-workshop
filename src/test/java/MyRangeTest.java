@@ -64,4 +64,16 @@ public class MyRangeTest {
 		boolean result = range.endWithExclude();
 		assertTrue(result);
 	}
+	
+	@Test
+	public void case07() {
+		//Arrange
+		//Check start with exclude 1 and return start by 2
+		String input = "(1,5)";
+		MyRange range = new MyRange(input);
+		int result = range.getStart();
+		assertEquals(2, result);
+	}
+	
+	
 }
