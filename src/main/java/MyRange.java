@@ -1,5 +1,3 @@
-import java.util.stream.IntStream;
-
 public class MyRange {
 	private static final char END_NUMBER_POS = 1;
 	private static final int ASCII_TO_NUMBER = 48;
@@ -57,7 +55,7 @@ public class MyRange {
 	}
 
 	public void validate() throws InputInvalidException {
-		if(!input.startsWith("[") && !input.startsWith("(")) {
+		if((!input.startsWith("[") && !input.startsWith("(")) || (!input.endsWith("]") && !input.endsWith(")"))) {
 			throw new InputInvalidException("Input error");
 		}
 	}
