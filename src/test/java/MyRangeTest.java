@@ -94,4 +94,34 @@ public class MyRangeTest {
 		String result = range.result();
 		assertEquals("1,2,3,4,5", result);
 	}
+	
+	@Test
+	public void case10() {
+		//Arrange
+		//Check start exclude=1,end include=5 return 2,3,4,5
+		String input = "(1,5]";
+		MyRange range = new MyRange(input);
+		String result = range.result();
+		assertEquals("2,3,4,5", result);
+	}
+	
+	@Test
+	public void case11() {
+		//Arrange
+		//Check start include=1,end exclude=5 return 1,2,3,4
+		String input = "[1,5)";
+		MyRange range = new MyRange(input);
+		String result = range.result();
+		assertEquals("1,2,3,4", result);
+	}
+	
+	@Test
+	public void case12() {
+		//Arrange
+		//Check start exclude=1,end exclude=5 return 1,2,3,4
+		String input = "(1,5)";
+		MyRange range = new MyRange(input);
+		String result = range.result();
+		assertEquals("2,3,4", result);
+	}
 }

@@ -30,9 +30,9 @@ public class MyRange {
 	}
 
 	public int getEnd() {
-		if(startWithInclude()) {
+		if(endWithInclude()) {
 			return input.charAt((input.length() - 1) - END_NUMBER_POS) - ASCII_TO_NUMBER;		
-		} else if(startWithExclude()) {
+		} else if(endWithExclude()) {
 			return input.charAt((input.length() - 1) - END_NUMBER_POS) + MINUS_NUMBER_VAL_BY_EXCLUDE - ASCII_TO_NUMBER;
 		}
 		return -1;
@@ -54,6 +54,12 @@ public class MyRange {
 		}
 		sb.deleteCharAt(sb.length()-1);
 		return sb.toString();
+	}
+
+	public void validate() throws InputInvalidException {
+		if(!input.startsWith("[") && !input.startsWith("(")) {
+			throw new InputInvalidException("Input error");
+		}
 	}
 
 }
