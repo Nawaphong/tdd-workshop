@@ -9,7 +9,7 @@ public class MyRange {
 
 	public boolean startWithInclude() {
 		
-		return false;
+		return input.startsWith("[");
 	}
 
 }
