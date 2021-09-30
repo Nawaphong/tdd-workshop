@@ -2,7 +2,8 @@
 public class MyRange {
 	private static final char END_NUMBER_POS = 1;
 	private static final int ASCII_TO_NUMBER = 48;
-	private static final char ADD_NUMBER_VAL_BY_EXCLUDE = 1;
+	private static final int PLUS_NUMBER_VAL_BY_EXCLUDE = 1;
+	private static final int MINUS_NUMBER_VAL_BY_EXCLUDE = -1;
 	private String input;
 
 	public MyRange(String input) {
@@ -22,13 +23,18 @@ public class MyRange {
 		if(startWithInclude()) {
 			return input.charAt(1) - ASCII_TO_NUMBER;			
 		} else if(startWithExclude()) {
-			return input.charAt(1) + ADD_NUMBER_VAL_BY_EXCLUDE - ASCII_TO_NUMBER;
+			return input.charAt(1) + PLUS_NUMBER_VAL_BY_EXCLUDE - ASCII_TO_NUMBER;
 		}
 		return -1;
 	}
 
 	public int getEnd() {
-		return input.charAt((input.length() - 1) - END_NUMBER_POS) - ASCII_TO_NUMBER;
+		if(startWithInclude()) {
+			return input.charAt((input.length() - 1) - END_NUMBER_POS) - ASCII_TO_NUMBER;		
+		} else if(startWithExclude()) {
+			return input.charAt((input.length() - 1) - END_NUMBER_POS) + MINUS_NUMBER_VAL_BY_EXCLUDE - ASCII_TO_NUMBER;
+		}
+		return -1;
 	}
 
 	public boolean startWithExclude() {

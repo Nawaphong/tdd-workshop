@@ -75,5 +75,15 @@ public class MyRangeTest {
 		assertEquals(2, result);
 	}
 	
+	@Test
+	public void case08() {
+		//Arrange
+		//Check end with exclude 5 and return start by 4
+		String input = "(1,5)";
+		MyRange range = new MyRange(input);
+		int result = range.getEnd();
+		assertEquals(4, result);
+	}
+	
 	
 }
