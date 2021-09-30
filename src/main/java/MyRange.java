@@ -29,4 +29,8 @@ public class MyRange {
 		return input.startsWith("(");
 	}
 
+	public boolean endWithExclude() {
+		return input.endsWith(")");
+	}
+
 }

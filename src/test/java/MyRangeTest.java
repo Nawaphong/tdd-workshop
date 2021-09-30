@@ -54,4 +54,14 @@ public class MyRangeTest {
 		boolean result = range.startWithExclude();
 		assertTrue(result);
 	}
+	
+	@Test
+	public void case06() {
+		//Arrange
+		//Check end with exclude
+		String input = "(1,5)";
+		MyRange range = new MyRange(input);
+		boolean result = range.endWithExclude();
+		assertTrue(result);
+	}
 }
