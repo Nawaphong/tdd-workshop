@@ -85,5 +85,13 @@ public class MyRangeTest {
 		assertEquals(4, result);
 	}
 	
-	
+	@Test
+	public void case09() {
+		//Arrange
+		//Check start=1,end=5 with include return 1,2,3,4,5
+		String input = "[1,5]";
+		MyRange range = new MyRange(input);
+		String result = range.result();
+		assertEquals("1,2,3,4,5", result);
+	}
 }

@@ -1,3 +1,4 @@
+import java.util.stream.IntStream;
 
 public class MyRange {
 	private static final char END_NUMBER_POS = 1;
@@ -43,6 +44,16 @@ public class MyRange {
 
 	public boolean endWithExclude() {
 		return input.endsWith(")");
+	}
+
+	public String result() {
+		StringBuilder sb = new StringBuilder();
+		for (int i=getStart();i<=getEnd();i++) {
+			sb.append(i);
+			sb.append(',');
+		}
+		sb.deleteCharAt(sb.length()-1);
+		return sb.toString();
 	}
 
 }
