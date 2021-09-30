@@ -45,4 +45,13 @@ public class MyRangeTest {
 		assertEquals(5, result);
 	}
 
+	@Test
+	public void case05() {
+		//Arrange
+		//Check start with exclude
+		String input = "(1,5]";
+		MyRange range = new MyRange(input);
+		boolean result = range.startWithExclude();
+		assertTrue(result);
+	}
 }

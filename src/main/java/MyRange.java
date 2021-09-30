@@ -25,4 +25,8 @@ public class MyRange {
 		return input.charAt((input.length() - 1) - END_NUMBER_POS) - ASCII_TO_NUMBER;
 	}
 
+	public boolean startWithExclude() {
+		return input.startsWith("(");
+	}
+
 }
