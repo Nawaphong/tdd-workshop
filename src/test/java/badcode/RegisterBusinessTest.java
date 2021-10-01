@@ -1,10 +1,13 @@
 package badcode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class RegisterBusinessTest {
 
@@ -169,79 +172,80 @@ class RegisterBusinessTest {
 		assertEquals(100,business.register(sp, speaker));
 	}
 	
-	@Test
-	@DisplayName("ทดสอบเรียกโดยส่ง Speaker exp=0")
-	public void registerTest12() {
-		RegisterBusiness business = new RegisterBusiness();
-		Speaker speaker = new Speaker();
-		SpeakerRepository sp = new SpeakerRepository() {
-			@Override
-			public Integer saveSpeaker(Speaker speaker) {
-				return speaker.getRegistrationFee();
-			}
-		};
-		speaker.setFirstName("nawaphong");
-		speaker.setLastName("oncharun");
-		speaker.setEmail("nawaphong@gmail.com");
-		speaker.setExp(0);
-		
-		assertEquals(500,business.register(sp, speaker));
-	}
+//	@Test
+//	@DisplayName("ทดสอบเรียกโดยส่ง Speaker exp=0")
+//	public void registerTest12() {
+//		RegisterBusiness business = new RegisterBusiness();
+//		Speaker speaker = new Speaker();
+//		SpeakerRepository sp = new SpeakerRepository() {
+//			@Override
+//			public Integer saveSpeaker(Speaker speaker) {
+//				return speaker.getRegistrationFee();
+//			}
+//		};
+//		speaker.setFirstName("nawaphong");
+//		speaker.setLastName("oncharun");
+//		speaker.setEmail("nawaphong@gmail.com");
+//		speaker.setExp(0);
+//		
+//		assertEquals(500,business.register(sp, speaker));
+//	}
+//	
+//	@Test
+//	@DisplayName("ทดสอบเรียกโดยส่ง Speaker exp=2")
+//	public void registerTest13() {
+//		RegisterBusiness business = new RegisterBusiness();
+//		Speaker speaker = new Speaker();
+//		SpeakerRepository sp = new SpeakerRepository() {
+//			@Override
+//			public Integer saveSpeaker(Speaker speaker) {
+//				return speaker.getRegistrationFee();
+//			}
+//		};
+//		speaker.setFirstName("nawaphong");
+//		speaker.setLastName("oncharun");
+//		speaker.setEmail("nawaphong@gmail.com");
+//		speaker.setExp(2);
+//		
+//		assertEquals(250,business.register(sp, speaker));
+//	}
+//	
+//	@Test
+//	@DisplayName("ทดสอบเรียกโดยส่ง Speaker exp=4")
+//	public void registerTest14() {
+//		RegisterBusiness business = new RegisterBusiness();
+//		Speaker speaker = new Speaker();
+//		SpeakerRepository sp = new SpeakerRepository() {
+//			@Override
+//			public Integer saveSpeaker(Speaker speaker) {
+//				return speaker.getRegistrationFee();
+//			}
+//		};
+//		speaker.setFirstName("nawaphong");
+//		speaker.setLastName("oncharun");
+//		speaker.setEmail("nawaphong@gmail.com");
+//		speaker.setExp(4);
+//		
+//		assertEquals(100,business.register(sp, speaker));
+//	}
+//	
+//	@Test
+//	@DisplayName("ทดสอบเรียกโดยส่ง Speaker exp=6")
+//	public void registerTest15() {
+//		RegisterBusiness business = new RegisterBusiness();
+//		Speaker speaker = new Speaker();
+//		SpeakerRepository sp = new SpeakerRepository() {
+//			@Override
+//			public Integer saveSpeaker(Speaker speaker) {
+//				return speaker.getRegistrationFee();
+//			}
+//		};
+//		speaker.setFirstName("nawaphong");
+//		speaker.setLastName("oncharun");
+//		speaker.setEmail("nawaphong@gmail.com");
+//		speaker.setExp(6);
+//		
+//		assertEquals(50,business.register(sp, speaker));
+//	}
 	
-	@Test
-	@DisplayName("ทดสอบเรียกโดยส่ง Speaker exp=2")
-	public void registerTest13() {
-		RegisterBusiness business = new RegisterBusiness();
-		Speaker speaker = new Speaker();
-		SpeakerRepository sp = new SpeakerRepository() {
-			@Override
-			public Integer saveSpeaker(Speaker speaker) {
-				return speaker.getRegistrationFee();
-			}
-		};
-		speaker.setFirstName("nawaphong");
-		speaker.setLastName("oncharun");
-		speaker.setEmail("nawaphong@gmail.com");
-		speaker.setExp(2);
-		
-		assertEquals(250,business.register(sp, speaker));
-	}
-	
-	@Test
-	@DisplayName("ทดสอบเรียกโดยส่ง Speaker exp=4")
-	public void registerTest14() {
-		RegisterBusiness business = new RegisterBusiness();
-		Speaker speaker = new Speaker();
-		SpeakerRepository sp = new SpeakerRepository() {
-			@Override
-			public Integer saveSpeaker(Speaker speaker) {
-				return speaker.getRegistrationFee();
-			}
-		};
-		speaker.setFirstName("nawaphong");
-		speaker.setLastName("oncharun");
-		speaker.setEmail("nawaphong@gmail.com");
-		speaker.setExp(4);
-		
-		assertEquals(100,business.register(sp, speaker));
-	}
-	
-	@Test
-	@DisplayName("ทดสอบเรียกโดยส่ง Speaker exp=6")
-	public void registerTest15() {
-		RegisterBusiness business = new RegisterBusiness();
-		Speaker speaker = new Speaker();
-		SpeakerRepository sp = new SpeakerRepository() {
-			@Override
-			public Integer saveSpeaker(Speaker speaker) {
-				return speaker.getRegistrationFee();
-			}
-		};
-		speaker.setFirstName("nawaphong");
-		speaker.setLastName("oncharun");
-		speaker.setEmail("nawaphong@gmail.com");
-		speaker.setExp(6);
-		
-		assertEquals(50,business.register(sp, speaker));
-	}
 }
