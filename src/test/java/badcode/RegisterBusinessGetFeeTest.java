@@ -1,8 +1,8 @@
 package badcode;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -21,9 +21,10 @@ class RegisterBusinessGetFeeTest {
 	    "10,0",
 	})
 	void registerTest15(int expYear, int feeValue) {
-		RegisterBusiness business = new RegisterBusiness();
+		Speaker speaker = new Speaker();
 	    assertNotNull(expYear);
-	    int actualFee =  business.getFee(expYear);
+	    speaker.setExp(expYear);
+	    int actualFee =  speaker.getRegistrationFee();
 	    assertEquals(actualFee, feeValue);
 	}
 }

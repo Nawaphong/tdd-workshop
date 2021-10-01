@@ -1,61 +1,60 @@
 package badcode;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterBusiness {
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6})$",
+			Pattern.CASE_INSENSITIVE);
 
-    public Integer register(SpeakerRepository repository, Speaker speaker) {
-        Integer speakerId;
-        String[] domains = {"gmail.com", "live.com"};
+	public Integer register(SpeakerRepository repository, Speaker speaker) {
+		Integer speakerId;
 
-        if (speaker.getFirstName() != null && !speaker.getFirstName().trim().equals("")) {
-            if (speaker.getLastName() != null && !speaker.getLastName().trim().equals("")) {
-                if (speaker.getEmail() != null && !speaker.getEmail().trim().equals("")) {
-                    // Your Tasks ...
-                    String emailDomain = getEmailDomain(speaker.getEmail()); // Avoid ArrayIndexOutOfBound
-                    if (Arrays.stream(domains).filter(it -> it.equals(emailDomain)).count() == 1) {
-                        int exp = speaker.getExp();
-                        speaker.setRegistrationFee(getFee(exp));
-                        try {
-                            speakerId = repository.saveSpeaker(speaker);
-                        } catch (Exception exception) {
+		// validate input
+		validateInput(speaker);
+		// Your Tasks ...
+
+		// Save Speaker
+		try {
+			speakerId = repository.saveSpeaker(speaker);
+		} catch (Exception exception) {
 //                        	exception.printStackTrace();
-                            throw new SaveSpeakerException("Can't save a speaker.");
-                        }
-                    } else {
-                        throw new SpeakerDoesntMeetRequirementsException("Speaker doesn't meet our standard rules.");
-                    }
-                } else {
-                    throw new ArgumentNullException("Email is required.");
-                }
-            } else {
-                throw new ArgumentNullException("Last name is required.");
-            }
-        } else {
-            throw new ArgumentNullException("First name is required.");
-        }
+			throw new SaveSpeakerException("Can't save a speaker.");
+		}
+		return speakerId;
+	}
 
-        return speakerId;
-    }
+	private void validateInput(Speaker speaker) {
+		if (isNullOrEmpty(speaker.getFirstName())) {
+			throw new ArgumentNullException("First name is required.");
+		}
+		if (isNullOrEmpty(speaker.getLastName())) {
+			throw new ArgumentNullException("Last name is required.");
+		}
+		if (isNullOrEmpty(speaker.getEmail())) {
+			throw new ArgumentNullException("Email is required.");
+		}
 
-    int getFee(int experienceYear) {
-        int fee = 0;
-        if (experienceYear <= 1) {
-            fee = 500;
-        } else if (experienceYear <= 3) {
-            fee = 250;
-        } else if (experienceYear <= 5) {
-            fee = 100;
-        } else if (experienceYear <= 9) {
-            fee = 50;
-        }
-        return fee;
-    }
+		final String[] domains = { "gmail.com", "live.com" };
+		String emailDomain = getEmailDomain(speaker.getEmail()); // Avoid ArrayIndexOutOfBound
+		System.out.println(Arrays.stream(domains).anyMatch(emailDomain::equals));
+		if (!Arrays.stream(domains).anyMatch(emailDomain::equals)) {
+			System.out.println(emailDomain);
+			throw new SpeakerDoesntMeetRequirementsException("Speaker doesn't meet our standard rules.");
+		}
+	}
 
-    public String getEmailDomain(String email) {
-        String[] inputs = email.trim().split("@");
-        if (inputs.length == 2) return inputs[1];
-        throw new DomainEmailInvalidException();
-    }
+	private boolean isNullOrEmpty(String inp) {
+		return inp == null || inp.trim().equals("");
+	}
 
+	public String getEmailDomain(String email) {
+		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+		if(!matcher.find()) {
+			throw new DomainEmailInvalidException();
+		}else {
+			return matcher.group(1);
+		}
+	}
 }
